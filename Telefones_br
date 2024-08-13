@@ -1,0 +1,29 @@
+import re
+import pandas as pd
+from validate_docbr import CPF, CNPJ
+import requests
+
+
+class TelefonesBr:
+    def __init__(self, telefone):
+        if self.valida_telefone(telefone):
+            self.numero = telefone
+        else:
+            raise ValueError("Número incorreto")
+
+    def valida_telefone(self, telefone):
+        padrao = r"^(\d{2,3})?(\d{2})?(\d{4,5})(\d{4})$"
+        resposta = re.findall(padrao, telefone)
+        return bool(resposta)
+
+    def formata_numero(self):
+        padrao = r"^(\d{2,3})?(\d{2})?(\d{4,5})(\d{4})$"
+        resposta = re.search(padrao, self.numero)
+        codigo_pais = f"+{resposta.group(1)} " if resposta.group(1) else ""
+        ddd = f"({resposta.group(2)}) " if resposta.group(2) else ""
+        numero_formatado = f"{codigo_pais}{ddd}{resposta.group(3)}-{resposta.group(4)}"
+        
+        return numero_formatado
+
+    def __str__(self):
+        return self.formata_numero()
