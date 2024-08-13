@@ -1,0 +1,43 @@
+import re
+import pandas as pd
+from validate_docbr import CPF, CNPJ
+import requests
+
+telefone = "digite aqui o número de telefone"
+telefone_objeto = TelefonesBr(telefone)
+dados.append({
+    "Tipo": "Telefone",
+    "Valor Original": telefone,
+    "Valor Formatado": str(telefone_objeto)
+})
+
+
+cpf = "digite aqui o número de cpf"
+cpf_objeto = Documento.cria_documento(cpf)
+dados.append({
+    "Tipo": "CPF",
+    "Valor Original": cpf,
+    "Valor Formatado": str(cpf_objeto)
+})
+
+Validação de um CNPJ
+cnpj = "digite aqui o cnpj"
+cnpj_objeto = Documento.cria_documento(cnpj)
+dados.append({
+    "Tipo": "CNPJ",
+    "Valor Original": cnpj,
+   "Valor Formatado": str(cnpj_objeto)
+})
+
+
+cep = "digite aqui o cep"
+cep_objeto = BuscaEndereco(cep)
+bairro, localidade, uf = cep_objeto.acesso_via_cep()
+dados.append({
+    "Tipo": "CEP",
+    "Valor Original": cep,
+    "Valor Formatado": str(cep_objeto),
+    "Bairro": bairro,
+    "Localidade": localidade,
+    "UF": uf
+})
